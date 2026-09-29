@@ -68,29 +68,31 @@ class _SnowState extends State<SnowLayer> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) => IgnorePointer(
-        child: AnimatedBuilder(
-          animation: _c,
-          builder: (_, __) => CustomPaint(size: Size.infinite, painter: _P(f, _c.value, widget.color)),
+        child: RepaintBoundary(
+          child: CustomPaint(size: Size.infinite, painter: _P(f, _c, widget.color)),
         ),
       );
 }
 
 class _P extends CustomPainter {
   final List<List<double>> f;
-  final double t;
+  final Animation<double> a;
   final Color c;
-  _P(this.f, this.t, this.c);
+  final Paint _paint = Paint();
+  _P(this.f, this.a, this.c) : super(repaint: a);
   @override
   void paint(Canvas canvas, Size s) {
+    final t = a.value;
     for (final p in f) {
       final y = ((p[1] + t * p[3]) % 1.0) * s.height;
       final x = (p[0] * s.width + sin(t * 12.56 + p[0] * 9) * 12) % s.width;
-      canvas.drawCircle(Offset(x, y), p[2], Paint()..color = c.withOpacity(.2 + p[3] * .5));
+      _paint.color = c.withOpacity(.2 + p[3] * .5);
+      canvas.drawCircle(Offset(x, y), p[2], _paint);
     }
   }
 
   @override
-  bool shouldRepaint(_P o) => true;
+  bool shouldRepaint(_P o) => o.c != c;
 }
 
 Widget card({required Widget child, VoidCallback? onTap, EdgeInsets pad = const EdgeInsets.all(16)}) => Material(
@@ -120,7 +122,10 @@ class Btn extends StatelessWidget {
   const Btn(this.t, this.f, {super.key, this.filled = true});
   @override
   Widget build(BuildContext context) => GestureDetector(
-        onTap: f,
+        onTap: () {
+          HapticFeedback.selectionClick();
+          f();
+        },
         child: Container(
           height: 54,
           alignment: Alignment.center,
@@ -221,35 +226,117 @@ class Welcome extends StatelessWidget {
 }
 
 // ---------- WebView helpers ----------
-const _inject = '''
-var m=document.querySelector('meta[name=viewport]');
-if(!m){m=document.createElement('meta');m.name='viewport';document.head.appendChild(m);}
+// Security: only these hosts (exact or sub-domain, https only) open inside the app.
+const _trustedHosts = ['snowpanel.ir', 'zibal.ir', 'shaparak.ir'];
+bool _trusted(Uri u) => u.scheme == 'https' && _trustedHosts.any((h) => u.host == h || u.host.endsWith('.$h'));
+bool _isSite(String s) {
+  final u = Uri.tryParse(s);
+  return u != null && u.scheme == 'https' && (u.host == 'snowpanel.ir' || u.host.endsWith('.snowpanel.ir'));
+}
+
+// If the saved session is gone (site sends us to /login) -> back to Welcome, once.
+bool _leaving = false;
+Future<void> _guard(BuildContext ctx, String u) async {
+  if (_leaving || !_isSite(u) || !Uri.parse(u).path.startsWith('/login')) return;
+  _leaving = true;
+  final sp = await SharedPreferences.getInstance();
+  await sp.remove('in');
+  if (ctx.mounted) Navigator.of(ctx).pushAndRemoveUntil(fade(const Welcome()), (_) => false);
+  _leaving = false;
+}
+
+// Injected into every page: hides site-only parts (header/footer, mobile bottom bar,
+// "back to site" links) and keeps the user logged in ("remember me" auto-ticked).
+const _inject = r"""
+(function(){
+if(window.__snowRun){window.__snowRun();return;}
+var HIDE_HEADER=true;
+var d=document,R=function(){return d.head||d.documentElement;};
+var KEYS=['بازگشت به','برگشت به','رفتن به سایت','صفحه اصلی','back to','go to','return to','powered by','قدرت گرفته','طراحی شده'];
+var m=d.querySelector('meta[name=viewport]');
+if(!m){m=d.createElement('meta');m.name='viewport';R().appendChild(m);}
 m.content='width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no';
-var s=document.createElement('style');
-var css='footer,.elementor-location-header,.elementor-location-footer{display:none!important}html,body{overflow-x:hidden!important;max-width:100vw!important}';
-if(location.pathname.indexOf('/dashboard')<0){css+='header{display:none!important}';}
-s.innerHTML=css;document.head.appendChild(s);
-''';
+var css='footer,.elementor-location-header,.elementor-location-footer,#wpadminbar,#backtoblog,.back-to-site,[class*="back-to-"],[class*="backto"],[class*="bottom-nav"],[class*="bottom-bar"],[class*="mobile-bottom"],[class*="tabbar"],[class*="tab-bar"],[id*="bottom-nav"],[id*="mobile-bottom"]{display:none!important}';
+css+='html,body{overflow-x:hidden!important;max-width:100vw!important}body{padding-bottom:0!important;margin-bottom:0!important}';
+if(HIDE_HEADER){css+=(location.pathname.indexOf('/dashboard')<0)?'header{display:none!important}':'body>header,#masthead,.site-header,[data-elementor-type="header"]{display:none!important}';}
+var s=d.createElement('style');s.id='__snowcss';s.textContent=css;R().appendChild(s);
+function isAuth(){return location.pathname.indexOf('/login')>-1||/action=register/.test(location.search);}
+function hide(e){e.style.setProperty('display','none','important');e.__sn=1;}
+function remember(){
+ d.querySelectorAll('input[type=checkbox]').forEach(function(x){
+  var l=x.closest('label'),k=((x.name||'')+(x.id||'')).toLowerCase(),t=((l&&l.textContent)||'').toLowerCase();
+  if(k.indexOf('remember')>-1||t.indexOf('remember')>-1||t.indexOf('به خاطر')>-1||t.indexOf('بخاطر')>-1){
+   if(!x.checked)x.click();
+   hide(l||x.parentElement||x);
+  }
+ });
+}
+function keyHide(){
+ d.querySelectorAll('a,button,span,p,li,div,small').forEach(function(e){
+  if(e.__sn||e.children.length>3||e.querySelector('input,select,textarea,form'))return;
+  var t=(e.textContent||'').replace(/\s+/g,' ').trim().toLowerCase();
+  if(!t||t.length>32)return;
+  for(var i=0;i<KEYS.length;i++){if(t.indexOf(KEYS[i])>-1){hide(e.closest('a,button')||e);return;}}
+ });
+}
+function bars(){
+ var w=innerWidth,h=innerHeight;
+ d.querySelectorAll('body>*,body>*>*,body>*>*>*').forEach(function(e){
+  if(e.__sn)return;
+  var c=getComputedStyle(e);
+  if(c.position!=='fixed'&&c.position!=='sticky')return;
+  var r=e.getBoundingClientRect();
+  if(r.width<w*.6||r.height<30||r.height>150||Math.abs(r.bottom-h)>6)return;
+  if(e.querySelector('input,textarea,select,[type=submit]'))return;
+  var k=((e.getAttribute('class')||'')+' '+e.id).toLowerCase();
+  if(e.tagName==='NAV'||/(bottom|mobile|tab|nav|dock|menu|bar)/.test(k)||e.querySelectorAll('a,button').length>=3)hide(e);
+ });
+}
+function sweep(){try{if(isAuth()){remember();keyHide();}bars();}catch(e){}}
+var q=0;
+function run(){if(q)return;q=setTimeout(function(){q=0;sweep();},400);}
+window.__snowRun=run;
+try{new MutationObserver(run).observe(d.documentElement,{childList:true,subtree:true});}catch(e){}
+d.addEventListener('DOMContentLoaded',run);
+addEventListener('resize',run);
+sweep();
+})();
+""";
 
 WebViewController makeController(String url, {void Function(int)? onProgress, void Function(String)? onUrl}) {
-  final c = WebViewController()
+  final c = WebViewController();
+  c
     ..setJavaScriptMode(JavaScriptMode.unrestricted)
     ..setBackgroundColor(cBg)
     ..enableZoom(false)
     ..setNavigationDelegate(NavigationDelegate(
       onProgress: onProgress,
+      onPageStarted: (_) => c.runJavaScript(_inject),
       onPageFinished: (u) {
+        c.runJavaScript(_inject);
         onUrl?.call(u);
       },
       onNavigationRequest: (r) {
-        final u = Uri.parse(r.url);
-        if (u.host.endsWith('snowpanel.ir') || u.host.contains('zibal.ir') || u.host.contains('shaparak.ir')) return NavigationDecision.navigate;
-        launchUrl(u, mode: LaunchMode.externalApplication);
+        final u = Uri.tryParse(r.url);
+        if (u == null) return NavigationDecision.prevent;
+        if (!r.isMainFrame || u.scheme == 'about' || _trusted(u)) return NavigationDecision.navigate;
+        // external links: only safe schemes, never file:/intent:/javascript:
+        if (const ['https', 'tg', 'mailto', 'tel'].contains(u.scheme)) launchUrl(u, mode: LaunchMode.externalApplication);
         return NavigationDecision.prevent;
       },
     ))
     ..loadRequest(Uri.parse(url));
   return c;
+}
+
+class _Cover extends StatelessWidget {
+  const _Cover();
+  @override
+  Widget build(BuildContext context) => Container(
+        color: cBg,
+        alignment: Alignment.center,
+        child: const SizedBox(width: 30, height: 30, child: CircularProgressIndicator(strokeWidth: 3, color: cBlue)),
+      );
 }
 
 class AuthPage extends StatefulWidget {
@@ -265,9 +352,10 @@ class _AuthState extends State<AuthPage> {
   @override
   void initState() {
     super.initState();
-    c = makeController(base + (widget.register ? '/login/?action=register' : '/login'), onProgress: (v) => setState(() => p = v), onUrl: (u) async {
-      c.runJavaScript(_inject);
-      if (u.contains('/dashboard')) {
+    c = makeController(base + (widget.register ? '/login/?action=register' : '/login'), onProgress: (v) {
+      if (mounted) setState(() => p = v);
+    }, onUrl: (u) async {
+      if (_isSite(u) && Uri.parse(u).path.startsWith('/dashboard')) {
         final sp = await SharedPreferences.getInstance();
         await sp.setBool('in', true);
         if (mounted) Navigator.of(context).pushAndRemoveUntil(fade(const Shell()), (_) => false);
@@ -284,7 +372,7 @@ class _AuthState extends State<AuthPage> {
           iconTheme: const IconThemeData(color: cInk),
           bottom: p < 100 ? PreferredSize(preferredSize: const Size.fromHeight(2), child: LinearProgressIndicator(value: p / 100, minHeight: 2, color: cCyan)) : null,
         ),
-        body: WebViewWidget(controller: c),
+        body: Stack(children: [WebViewWidget(controller: c), if (p < 80) const Positioned.fill(child: _Cover())]),
       );
 }
 
@@ -303,7 +391,9 @@ class _WebTabState extends State<WebTab> with AutomaticKeepAliveClientMixin {
   @override
   void initState() {
     super.initState();
-    c = makeController(base + widget.url, onProgress: (v) => setState(() => p = v), onUrl: (_) => c.runJavaScript(_inject));
+    c = makeController(base + widget.url, onProgress: (v) {
+      if (mounted) setState(() => p = v);
+    }, onUrl: (u) => _guard(context, u));
   }
 
   @override
@@ -324,7 +414,7 @@ class _WebTabState extends State<WebTab> with AutomaticKeepAliveClientMixin {
           ]),
         ),
         if (p < 100) LinearProgressIndicator(value: p / 100, minHeight: 2, color: cCyan, backgroundColor: cSoft),
-        Expanded(child: WebViewWidget(controller: c)),
+        Expanded(child: Stack(children: [WebViewWidget(controller: c), if (p < 80) const Positioned.fill(child: _Cover())])),
       ]),
     );
   }
@@ -524,6 +614,9 @@ class More extends StatelessWidget {
             final sp = await SharedPreferences.getInstance();
             await sp.remove('in');
             await WebViewCookieManager().clearCookies();
+            final wc = WebViewController();
+            await wc.clearCache();
+            await wc.clearLocalStorage();
             if (context.mounted) Navigator.of(context).pushAndRemoveUntil(fade(const Welcome()), (_) => false);
           }, filled: false),
         ]),
@@ -548,9 +641,12 @@ class _Web extends StatefulWidget {
 }
 
 class _WebS extends State<_Web> {
-  late final WebViewController c = makeController(base + widget.url, onUrl: (_) => c.runJavaScript(_inject));
+  int p = 0;
+  late final WebViewController c = makeController(base + widget.url, onProgress: (v) {
+      if (mounted) setState(() => p = v);
+    }, onUrl: (u) => _guard(context, u));
   @override
-  Widget build(BuildContext context) => WebViewWidget(controller: c);
+  Widget build(BuildContext context) => Stack(children: [WebViewWidget(controller: c), if (p < 80) const Positioned.fill(child: _Cover())]);
 }
 
 // ---------- Support ----------
