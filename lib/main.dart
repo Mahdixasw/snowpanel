@@ -31,7 +31,7 @@ class SnowApp extends StatelessWidget {
   const SnowApp({super.key});
   @override
   Widget build(BuildContext context) => MaterialApp(
-        title: 'Ø§Ø³Ù†Ùˆ Ù¾Ù†Ù„',
+        title: 'اسنو پنل',
         debugShowCheckedModeBanner: false,
         locale: const Locale('fa'),
         builder: (c, w) => Directionality(textDirection: TextDirection.rtl, child: w!),
@@ -113,7 +113,7 @@ Widget card({required Widget child, VoidCallback? onTap, EdgeInsets pad = const 
       ),
     );
 
-Widget logo(double s) => Image.asset('assets/logo.png', width: s, errorBuilder: (_, __, ___) => Text('â„', style: TextStyle(fontSize: s * .8)));
+Widget logo(double s) => Image.asset('assets/logo.png', width: s, errorBuilder: (_, __, ___) => Text('❄', style: TextStyle(fontSize: s * .8)));
 
 class Btn extends StatelessWidget {
   final String t;
@@ -167,7 +167,7 @@ class _SplashState extends State<Splash> {
               child: Column(mainAxisSize: MainAxisSize.min, children: [
                 Container(padding: const EdgeInsets.all(20), decoration: const BoxDecoration(color: Colors.white, shape: BoxShape.circle), child: logo(80)),
                 const SizedBox(height: 18),
-                const Text('Ø§Ø³Ù†Ùˆ Ù¾Ù†Ù„', style: TextStyle(fontSize: 30, fontWeight: FontWeight.w700, color: Colors.white)),
+                const Text('اسنو پنل', style: TextStyle(fontSize: 30, fontWeight: FontWeight.w700, color: Colors.white)),
               ]),
             ),
           ]),
@@ -189,16 +189,16 @@ class Welcome extends StatelessWidget {
                 const Spacer(flex: 2),
                 Container(padding: const EdgeInsets.all(18), decoration: const BoxDecoration(color: Colors.white, shape: BoxShape.circle), child: logo(64)),
                 const SizedBox(height: 20),
-                const Text('Ø¨Ù‡ Ø§Ø³Ù†Ùˆ Ù¾Ù†Ù„ Ø®ÙˆØ´ Ø§ÙˆÙ…Ø¯ÛŒ', style: TextStyle(fontSize: 24, fontWeight: FontWeight.w700, color: Colors.white)),
+                const Text('به اسنو پنل خوش اومدی', style: TextStyle(fontSize: 24, fontWeight: FontWeight.w700, color: Colors.white)),
                 const SizedBox(height: 8),
                 const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 36),
-                  child: Text('ÙØ§Ù„ÙˆÙˆØ±ØŒ Ù…Ù…Ø¨Ø± Ùˆ Ø¨Ø§Ø²Ø¯ÛŒØ¯ Ù…Ø³ØªÙ‚ÛŒÙ… Ø§Ø² Ø§Ø±Ø§Ø¦Ù‡â€ŒØ¯Ù‡Ù†Ø¯Ù‡\nØ¨Ø¯ÙˆÙ† Ø±Ù…Ø²ØŒ Ø¨Ø§ Ø±Ù‡Ú¯ÛŒØ±ÛŒ Ø²Ù†Ø¯Ù‡ Ø³ÙØ§Ø±Ø´',
+                  child: Text('فالوور، ممبر و بازدید مستقیم از ارائه‌دهنده\nبدون رمز، با رهگیری زنده سفارش',
                       textAlign: TextAlign.center, style: TextStyle(color: Colors.white, height: 1.8)),
                 ),
                 const SizedBox(height: 20),
                 Wrap(spacing: 8, runSpacing: 8, alignment: WrapAlignment.center, children: [
-                  for (final t in ['ðŸ”’ Ø¨Ø¯ÙˆÙ† Ø±Ù…Ø²', 'ðŸ“¦ Ø±Ù‡Ú¯ÛŒØ±ÛŒ Ø²Ù†Ø¯Ù‡', 'ðŸŽ Ù‡Ø¯ÛŒÙ‡ Ø´Ø§Ø±Ú˜ Ø¨Ø§ SNOW5'])
+                  for (final t in ['🔒 بدون رمز', '📦 رهگیری زنده', '🎁 هدیه شارژ با SNOW5'])
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
                       decoration: BoxDecoration(color: Colors.white.withOpacity(.2), borderRadius: BorderRadius.circular(20)),
@@ -211,11 +211,11 @@ class Welcome extends StatelessWidget {
                   padding: const EdgeInsets.fromLTRB(24, 24, 24, 20),
                   decoration: const BoxDecoration(color: cBg, borderRadius: BorderRadius.vertical(top: Radius.circular(32))),
                   child: Column(mainAxisSize: MainAxisSize.min, children: [
-                    Btn('ÙˆØ±ÙˆØ¯ Ø¨Ù‡ Ø­Ø³Ø§Ø¨', () => Navigator.of(context).push(fade(const AuthPage(false)))),
+                    Btn('ورود به حساب', () => Navigator.of(context).push(fade(const AuthPage(false)))),
                     const SizedBox(height: 12),
-                    Btn('Ø³Ø§Ø®Øª Ø­Ø³Ø§Ø¨ Ø±Ø§ÛŒÚ¯Ø§Ù†', () => Navigator.of(context).push(fade(const AuthPage(true))), filled: false),
+                    Btn('ساخت حساب رایگان', () => Navigator.of(context).push(fade(const AuthPage(true))), filled: false),
                     const SizedBox(height: 10),
-                    TextButton(onPressed: () => open('https://t.me/snowpanelsup'), child: const Text('Ù…Ø´Ú©Ù„ Ø¯Ø± ÙˆØ±ÙˆØ¯ØŸ Ù¾Ø´ØªÛŒØ¨Ø§Ù†ÛŒ ØªÙ„Ú¯Ø±Ø§Ù…', style: TextStyle(color: cMute))),
+                    TextButton(onPressed: () => open('https://t.me/snowpanelsup'), child: const Text('مشکل در ورود؟ پشتیبانی تلگرام', style: TextStyle(color: cMute))),
                   ]),
                 ),
               ]),
@@ -251,8 +251,8 @@ const _inject = r"""
 (function(){
 if(window.__snowRun){window.__snowRun();return;}
 var d=document,R=function(){return d.head||d.documentElement;};
-var KEYS=['Ø¨Ø§Ø²Ú¯Ø´Øª Ø¨Ù‡','Ø¨Ø±Ú¯Ø´Øª Ø¨Ù‡','Ø±ÙØªÙ† Ø¨Ù‡ Ø³Ø§ÛŒØª','ØµÙØ­Ù‡ Ø§ØµÙ„ÛŒ','back to','go to','return to','powered by','Ù‚Ø¯Ø±Øª Ú¯Ø±ÙØªÙ‡','Ø·Ø±Ø§Ø­ÛŒ Ø´Ø¯Ù‡'];
-var BANNER=['ØªÛŒÚ©Øª Ø§Ø±Ø³Ø§Ù„ Ù†Ú©Ù†ÛŒØ¯','Ø¬ÙˆØ§Ø¨ Ø¯Ø§Ø¯Ù‡ Ù†Ù…ÛŒ'];
+var KEYS=['بازگشت به','برگشت به','رفتن به سایت','صفحه اصلی','back to','go to','return to','powered by','قدرت گرفته','طراحی شده'];
+var BANNER=['تیکت ارسال نکنید','جواب داده نمی'];
 var TOP=/(^|[\s_-])(site-header|main-header|top-?bar|navbar|masthead|app-header|mobile-header|sticky-header|announce\w*|notice-bar|promo-bar|top-banner|alert-bar)/i;
 var BOT=/(bottom|dock|tab-?bar|mobile-nav|mobile-menu|footer|nav)/i;
 var m=d.querySelector('meta[name=viewport]');
@@ -313,7 +313,7 @@ function banner(){
 function remember(){
  d.querySelectorAll('input[type=checkbox]').forEach(function(x){
   var l=x.closest('label'),k=((x.name||'')+(x.id||'')).toLowerCase(),t=((l&&l.textContent)||'').toLowerCase();
-  if(k.indexOf('remember')>-1||t.indexOf('remember')>-1||t.indexOf('Ø¨Ù‡ Ø®Ø§Ø·Ø±')>-1||t.indexOf('Ø¨Ø®Ø§Ø·Ø±')>-1){
+  if(k.indexOf('remember')>-1||t.indexOf('remember')>-1||t.indexOf('به خاطر')>-1||t.indexOf('بخاطر')>-1){
    if(!x.checked)x.click();
    hide(l||x.parentElement||x);
   }
@@ -432,7 +432,7 @@ class _AuthState extends State<AuthPage> {
         appBar: AppBar(
           backgroundColor: Colors.white,
           elevation: 0,
-          title: Text(widget.register ? 'Ø³Ø§Ø®Øª Ø­Ø³Ø§Ø¨' : 'ÙˆØ±ÙˆØ¯', style: const TextStyle(fontWeight: FontWeight.w700, color: cInk)),
+          title: Text(widget.register ? 'ساخت حساب' : 'ورود', style: const TextStyle(fontWeight: FontWeight.w700, color: cInk)),
           iconTheme: const IconThemeData(color: cInk),
           bottom: p < 100 ? PreferredSize(preferredSize: const Size.fromHeight(2), child: LinearProgressIndicator(value: p / 100, minHeight: 2, color: cCyan)) : null,
         ),
@@ -514,20 +514,20 @@ class _ShellState extends State<Shell> {
   Widget build(BuildContext context) => Scaffold(
         body: IndexedStack(index: i, children: [
           Home(go),
-          seen.contains(1) ? const WebTab('/services-3', 'Ù‡Ù…Ù‡ Ø®Ø¯Ù…Ø§Øª') : const SizedBox(),
-          seen.contains(2) ? const WebTab('/dashboard/?action=orders&section=new', 'Ø³ÙØ§Ø±Ø´ Ø¬Ø¯ÛŒØ¯') : const SizedBox(),
-          seen.contains(3) ? const WebTab('/dashboard/?action=add-credit', 'Ø´Ø§Ø±Ú˜ Ø­Ø³Ø§Ø¨') : const SizedBox(),
+          seen.contains(1) ? const WebTab('/services-3', 'همه خدمات') : const SizedBox(),
+          seen.contains(2) ? const WebTab('/dashboard/?action=orders&section=new', 'سفارش جدید') : const SizedBox(),
+          seen.contains(3) ? const WebTab('/dashboard/?action=add-credit', 'شارژ حساب') : const SizedBox(),
           const More(),
         ]),
         bottomNavigationBar: NavigationBar(
           selectedIndex: i,
           onDestinationSelected: go,
           destinations: const [
-            NavigationDestination(icon: Icon(Icons.home_outlined), selectedIcon: Icon(Icons.home_rounded, color: cBlue), label: 'Ø®Ø§Ù†Ù‡'),
-            NavigationDestination(icon: Icon(Icons.grid_view_outlined), selectedIcon: Icon(Icons.grid_view_rounded, color: cBlue), label: 'Ø®Ø¯Ù…Ø§Øª'),
-            NavigationDestination(icon: Icon(Icons.add_circle_outline), selectedIcon: Icon(Icons.add_circle_rounded, color: cBlue), label: 'Ø³ÙØ§Ø±Ø´'),
-            NavigationDestination(icon: Icon(Icons.account_balance_wallet_outlined), selectedIcon: Icon(Icons.account_balance_wallet_rounded, color: cBlue), label: 'Ú©ÛŒÙ Ù¾ÙˆÙ„'),
-            NavigationDestination(icon: Icon(Icons.menu_rounded), selectedIcon: Icon(Icons.menu_rounded, color: cBlue), label: 'Ø¨ÛŒØ´ØªØ±'),
+            NavigationDestination(icon: Icon(Icons.home_outlined), selectedIcon: Icon(Icons.home_rounded, color: cBlue), label: 'خانه'),
+            NavigationDestination(icon: Icon(Icons.grid_view_outlined), selectedIcon: Icon(Icons.grid_view_rounded, color: cBlue), label: 'خدمات'),
+            NavigationDestination(icon: Icon(Icons.add_circle_outline), selectedIcon: Icon(Icons.add_circle_rounded, color: cBlue), label: 'سفارش'),
+            NavigationDestination(icon: Icon(Icons.account_balance_wallet_outlined), selectedIcon: Icon(Icons.account_balance_wallet_rounded, color: cBlue), label: 'کیف پول'),
+            NavigationDestination(icon: Icon(Icons.menu_rounded), selectedIcon: Icon(Icons.menu_rounded, color: cBlue), label: 'بیشتر'),
           ],
         ),
       );
@@ -551,22 +551,22 @@ class Home extends StatelessWidget {
                   Row(children: [
                     Container(padding: const EdgeInsets.all(6), decoration: const BoxDecoration(color: Colors.white, shape: BoxShape.circle), child: logo(26)),
                     const SizedBox(width: 10),
-                    const Expanded(child: Text('Ø§Ø³Ù†Ùˆ Ù¾Ù†Ù„', style: TextStyle(fontSize: 19, fontWeight: FontWeight.w700, color: Colors.white))),
+                    const Expanded(child: Text('اسنو پنل', style: TextStyle(fontSize: 19, fontWeight: FontWeight.w700, color: Colors.white))),
                     IconButton(
                         onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const Support())),
                         icon: const Icon(Icons.support_agent_rounded, color: Colors.white)),
                   ]),
                   const SizedBox(height: 18),
-                  const Text('Ø³Ù„Ø§Ù…ØŒ Ø®ÙˆØ´ Ø§ÙˆÙ…Ø¯ÛŒ â„', style: TextStyle(fontSize: 24, fontWeight: FontWeight.w700, color: Colors.white)),
+                  const Text('سلام، خوش اومدی ❄', style: TextStyle(fontSize: 24, fontWeight: FontWeight.w700, color: Colors.white)),
                   const SizedBox(height: 6),
-                  const Text('Ø³ÙØ§Ø±Ø´ Ø¨Ø¯Ù‡ØŒ Ø±Ù‡Ú¯ÛŒØ±ÛŒ Ú©Ù†ØŒ Ø±Ø´Ø¯ Ú©Ù†', style: TextStyle(color: Colors.white)),
+                  const Text('سفارش بده، رهگیری کن، رشد کن', style: TextStyle(color: Colors.white)),
                   const SizedBox(height: 20),
                   Row(children: const [
-                    Expanded(child: _Stat('Û²Û°Û°,Û°Û°Û°+', 'Ø³ÙØ§Ø±Ø´')),
+                    Expanded(child: _Stat('۲۰۰,۰۰۰+', 'سفارش')),
                     SizedBox(width: 10),
-                    Expanded(child: _Stat('Û±Û³,Û°Û°Û°+', 'Ù…Ø´ØªØ±ÛŒ')),
+                    Expanded(child: _Stat('۱۳,۰۰۰+', 'مشتری')),
                     SizedBox(width: 10),
-                    Expanded(child: _Stat('Û¶ Ø³Ø§Ù„', 'Ø³Ø§Ø¨Ù‚Ù‡')),
+                    Expanded(child: _Stat('۶ سال', 'سابقه')),
                   ]),
                 ]),
               ),
@@ -577,16 +577,16 @@ class Home extends StatelessWidget {
           padding: const EdgeInsets.all(20),
           child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Row(children: [
-              _Quick(Icons.add_circle_rounded, 'Ø³ÙØ§Ø±Ø´ Ø¬Ø¯ÛŒØ¯', () => go(2)),
-              _Quick(Icons.account_balance_wallet_rounded, 'Ø´Ø§Ø±Ú˜', () => go(3)),
-              _Quick(Icons.grid_view_rounded, 'Ø®Ø¯Ù…Ø§Øª', () => go(1)),
-              _Quick(Icons.support_agent_rounded, 'Ù¾Ø´ØªÛŒØ¨Ø§Ù†ÛŒ', () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const Support()))),
+              _Quick(Icons.add_circle_rounded, 'سفارش جدید', () => go(2)),
+              _Quick(Icons.account_balance_wallet_rounded, 'شارژ', () => go(3)),
+              _Quick(Icons.grid_view_rounded, 'خدمات', () => go(1)),
+              _Quick(Icons.support_agent_rounded, 'پشتیبانی', () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const Support()))),
             ]),
             const SizedBox(height: 26),
-            const Text('Ú©Ø¯Ø§Ù… Ø´Ø¨Ú©Ù‡ØŸ', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700, color: cInk)),
+            const Text('کدام شبکه؟', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700, color: cInk)),
             const SizedBox(height: 12),
             Wrap(spacing: 10, runSpacing: 10, children: [
-              for (final n in ['âœˆï¸ ØªÙ„Ú¯Ø±Ø§Ù…', 'ðŸ“¸ Ø§ÛŒÙ†Ø³ØªØ§Ú¯Ø±Ø§Ù…', 'ðŸŸ  Ø§ÛŒØªØ§', 'ðŸ”µ Ø±ÙˆØ¨ÛŒÚ©Ø§', 'â–¶ï¸ ÛŒÙˆØªÛŒÙˆØ¨', 'ðŸŽµ ØªÛŒÚ©â€ŒØªØ§Ú©', 'ðŸ¦ ØªÙˆÛŒÛŒØªØ±', 'ðŸŒ Ø¨Ù‚ÛŒÙ‡'])
+              for (final n in ['✈️ تلگرام', '📸 اینستاگرام', '🟠 ایتا', '🔵 روبیکا', '▶️ یوتیوب', '🎵 تیک‌تاک', '🐦 توییتر', '🌐 بقیه'])
                 GestureDetector(
                   onTap: () => go(1),
                   child: Container(
@@ -600,12 +600,12 @@ class Home extends StatelessWidget {
             card(
               onTap: () {
                 Clipboard.setData(const ClipboardData(text: 'SNOW5'));
-                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Ú©Ø¯ SNOW5 Ú©Ù¾ÛŒ Ø´Ø¯')));
+                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('کد SNOW5 کپی شد')));
               },
               child: Row(children: [
-                const Text('ðŸŽ', style: TextStyle(fontSize: 30)),
+                const Text('🎁', style: TextStyle(fontSize: 30)),
                 const SizedBox(width: 14),
-                const Expanded(child: Text('Ù‡Ø¯ÛŒÙ‡ Ø§ÙˆÙ„ÛŒÙ† Ø´Ø§Ø±Ú˜\nÚ©Ø¯ Ø±Ø§ Ù‡Ù†Ú¯Ø§Ù… Ø´Ø§Ø±Ú˜ ÙˆØ§Ø±Ø¯ Ú©Ù†', style: TextStyle(height: 1.7, color: cInk, fontWeight: FontWeight.w700))),
+                const Expanded(child: Text('هدیه اولین شارژ\nکد را هنگام شارژ وارد کن', style: TextStyle(height: 1.7, color: cInk, fontWeight: FontWeight.w700))),
                 Container(
                     padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
                     decoration: BoxDecoration(color: cSoft, borderRadius: BorderRadius.circular(12)),
@@ -676,16 +676,16 @@ class More extends StatelessWidget {
   @override
   Widget build(BuildContext context) => SafeArea(
         child: ListView(padding: const EdgeInsets.all(20), children: [
-          const Text('Ø¨ÛŒØ´ØªØ±', style: TextStyle(fontSize: 24, fontWeight: FontWeight.w700, color: cInk)),
+          const Text('بیشتر', style: TextStyle(fontSize: 24, fontWeight: FontWeight.w700, color: cInk)),
           const SizedBox(height: 16),
-          tile(context, Icons.dashboard_rounded, 'Ø¯Ø§Ø´Ø¨ÙˆØ±Ø¯', 'Ø­Ø³Ø§Ø¨ØŒ Ø§Ø·Ù„Ø§Ø¹Ø§Øª Ùˆ ØªÛŒÚ©Øªâ€ŒÙ‡Ø§', () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const Page('Ø¯Ø§Ø´Ø¨ÙˆØ±Ø¯', '/dashboard')))),
-          tile(context, Icons.account_balance_wallet_rounded, 'Ø´Ø§Ø±Ú˜ Ø­Ø³Ø§Ø¨', 'Ù¾Ø±Ø¯Ø§Ø®Øª Ø§Ù…Ù† Ø¨Ø§ Ø¯Ø±Ú¯Ø§Ù‡', () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const Page('Ø´Ø§Ø±Ú˜ Ø­Ø³Ø§Ø¨', '/dashboard/?action=add-credit')))),
-          tile(context, Icons.receipt_long_rounded, 'Ø³ÙØ§Ø±Ø´â€ŒÙ‡Ø§ÛŒ Ù…Ù†', 'Ø±Ù‡Ú¯ÛŒØ±ÛŒ ÙˆØ¶Ø¹ÛŒØª Ø³ÙØ§Ø±Ø´â€ŒÙ‡Ø§', () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const Page('Ø³ÙØ§Ø±Ø´â€ŒÙ‡Ø§ÛŒ Ù…Ù†', '/dashboard/?action=orders')))),
-          tile(context, Icons.support_agent_rounded, 'Ù¾Ø´ØªÛŒØ¨Ø§Ù†ÛŒ', 'ØªÙ„Ú¯Ø±Ø§Ù…ØŒ Ø±Ø¨Ø§Øª Ùˆ Ú©Ø§Ù†Ø§Ù„', () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const Support()))),
-          tile(context, Icons.help_rounded, 'Ø³ÙˆØ§Ù„Ø§Øª Ù…ØªØ¯Ø§ÙˆÙ„', 'Ù¾Ø§Ø³Ø® Ú©ÙˆØªØ§Ù‡ Ø¨Ù‡ Ù¾Ø±Ø³Ø´â€ŒÙ‡Ø§ÛŒ Ù¾Ø±ØªÚ©Ø±Ø§Ø±', () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const Faq()))),
-          tile(context, Icons.price_change_rounded, 'Ù„ÛŒØ³Øª Ù‚ÛŒÙ…Øª', 'Ù‚ÛŒÙ…Øª Ù‡Ù…Ù‡ Ø®Ø¯Ù…Ø§Øª', () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const Page('Ù„ÛŒØ³Øª Ù‚ÛŒÙ…Øª', '/price-service')))),
+          tile(context, Icons.dashboard_rounded, 'داشبورد', 'حساب، اطلاعات و تیکت‌ها', () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const Page('داشبورد', '/dashboard')))),
+          tile(context, Icons.account_balance_wallet_rounded, 'شارژ حساب', 'پرداخت امن با درگاه', () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const Page('شارژ حساب', '/dashboard/?action=add-credit')))),
+          tile(context, Icons.receipt_long_rounded, 'سفارش‌های من', 'رهگیری وضعیت سفارش‌ها', () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const Page('سفارش‌های من', '/dashboard/?action=orders')))),
+          tile(context, Icons.support_agent_rounded, 'پشتیبانی', 'تلگرام، ربات و کانال', () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const Support()))),
+          tile(context, Icons.help_rounded, 'سوالات متداول', 'پاسخ کوتاه به پرسش‌های پرتکرار', () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const Faq()))),
+          tile(context, Icons.price_change_rounded, 'لیست قیمت', 'قیمت همه خدمات', () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const Page('لیست قیمت', '/price-service')))),
           const SizedBox(height: 10),
-          Btn('Ø®Ø±ÙˆØ¬ Ø§Ø² Ø­Ø³Ø§Ø¨', () async {
+          Btn('خروج از حساب', () async {
             final sp = await SharedPreferences.getInstance();
             await sp.remove('in');
             await WebViewCookieManager().clearCookies();
@@ -745,16 +745,16 @@ class Support extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(backgroundColor: Colors.white, elevation: 0, iconTheme: const IconThemeData(color: cInk), title: const Text('Ù¾Ø´ØªÛŒØ¨Ø§Ù†ÛŒ', style: TextStyle(fontWeight: FontWeight.w700, color: cInk))),
+        appBar: AppBar(backgroundColor: Colors.white, elevation: 0, iconTheme: const IconThemeData(color: cInk), title: const Text('پشتیبانی', style: TextStyle(fontWeight: FontWeight.w700, color: cInk))),
         body: ListView(padding: const EdgeInsets.all(20), children: [
           card(
-            child: const Text('Ø¨Ø±Ø§ÛŒ Ù¾Ø§Ø³Ø® Ø³Ø±ÛŒØ¹â€ŒØªØ±ØŒ Ù¾ÛŒØ§Ù… ØªÙ„Ú¯Ø±Ø§Ù… Ø¨Ø¯Ù‡. ØªÛŒÚ©Øª Ø¯Ø§Ø®Ù„ Ù¾Ù†Ù„ Ø¬ÙˆØ§Ø¨ Ø¯Ø§Ø¯Ù‡ Ù†Ù…ÛŒâ€ŒØ´ÙˆØ¯.', style: TextStyle(height: 1.8, color: cInk, fontWeight: FontWeight.w700)),
+            child: const Text('برای پاسخ سریع‌تر، پیام تلگرام بده. تیکت داخل پنل جواب داده نمی‌شود.', style: TextStyle(height: 1.8, color: cInk, fontWeight: FontWeight.w700)),
           ),
           const SizedBox(height: 14),
-          item(Icons.support_agent_rounded, 'Ù¾Ø´ØªÛŒØ¨Ø§Ù†ÛŒ ØªÙ„Ú¯Ø±Ø§Ù…', '@snowpanelsup', 'https://t.me/snowpanelsup'),
-          item(Icons.smart_toy_rounded, 'Ø±Ø¨Ø§Øª ØªÙ„Ú¯Ø±Ø§Ù…', '@snowpanelbot', 'https://t.me/snowpanelbot'),
-          item(Icons.campaign_rounded, 'Ú©Ø§Ù†Ø§Ù„ ØªÙ„Ú¯Ø±Ø§Ù…', '@snowpanel', 'https://t.me/snowpanel'),
-          item(Icons.camera_alt_rounded, 'Ø§ÛŒÙ†Ø³ØªØ§Ú¯Ø±Ø§Ù…', '@snowpanel', 'https://instagram.com/snowpanel'),
+          item(Icons.support_agent_rounded, 'پشتیبانی تلگرام', '@snowpanelsup', 'https://t.me/snowpanelsup'),
+          item(Icons.smart_toy_rounded, 'ربات تلگرام', '@snowpanelbot', 'https://t.me/snowpanelbot'),
+          item(Icons.campaign_rounded, 'کانال تلگرام', '@snowpanel', 'https://t.me/snowpanel'),
+          item(Icons.camera_alt_rounded, 'اینستاگرام', '@snowpanel', 'https://instagram.com/snowpanel'),
         ]),
       );
 }
@@ -763,15 +763,15 @@ class Support extends StatelessWidget {
 class Faq extends StatelessWidget {
   const Faq({super.key});
   static const q = [
-    ['Ø¢ÛŒØ§ Ø¨Ø±Ø§ÛŒ Ø³ÙØ§Ø±Ø´ Ø¨Ù‡ Ø±Ù…Ø² Ø¹Ø¨ÙˆØ± Ù†ÛŒØ§Ø² Ø§Ø³ØªØŸ', 'Ø®ÛŒØ±. ÙÙ‚Ø· Ù„ÛŒÙ†Ú© Ø¹Ù…ÙˆÙ…ÛŒ Ù¾ÛŒØ¬ØŒ Ú©Ø§Ù†Ø§Ù„ ÛŒØ§ Ù¾Ø³Øª Ù„Ø§Ø²Ù… Ø§Ø³Øª. Ø±Ù…Ø² Ùˆ Ú©Ø¯ Ø¯ÙˆÙ…Ø±Ø­Ù„Ù‡â€ŒØ§ÛŒ Ø±Ø§ Ø¨Ù‡ Ù‡ÛŒÚ†â€ŒÚ©Ø³ Ù†Ø¯Ù‡ÛŒØ¯.'],
-    ['Ú†Ø·ÙˆØ± Ø§ÙˆÙ„ÛŒÙ† Ø³ÙØ§Ø±Ø´ Ø±Ø§ Ø«Ø¨Øª Ú©Ù†Ù…ØŸ', 'Ø«Ø¨Øªâ€ŒÙ†Ø§Ù… Ú©Ù†ÛŒØ¯ØŒ Ø­Ø³Ø§Ø¨ Ø±Ø§ Ø´Ø§Ø±Ú˜ Ú©Ù†ÛŒØ¯ØŒ Ø³Ø±ÙˆÛŒØ³ Ø±Ø§ Ø§Ù†ØªØ®Ø§Ø¨ Ùˆ Ù„ÛŒÙ†Ú© Ø±Ø§ ÙˆØ§Ø±Ø¯ Ú©Ù†ÛŒØ¯. Ø¨Ø§ ÛŒÚ© Ø³ÙØ§Ø±Ø´ ØªØ³Øª Ú©ÙˆÚ†Ú© Ø´Ø±ÙˆØ¹ Ú©Ù†ÛŒØ¯.'],
-    ['Ø§Ø±Ø§Ø¦Ù‡â€ŒØ¯Ù‡Ù†Ø¯Ù‡ Ù…Ø³ØªÙ‚ÛŒÙ… ÛŒØ¹Ù†ÛŒ Ú†Ù‡ØŸ', 'ÛŒØ¹Ù†ÛŒ Ø§Ø³Ù†Ùˆ Ù¾Ù†Ù„ Ø®Ø¯Ù…Ø§Øª Ø±Ø§ Ø§Ø² ÙˆØ§Ø³Ø·Ù‡ Ù†Ù…ÛŒâ€ŒØ®Ø±Ø¯Ø› Ù…Ø³ÛŒØ± Ø®Ø±ÛŒØ¯ Ú©ÙˆØªØ§Ù‡â€ŒØªØ± Ùˆ Ù‚ÛŒÙ…Øª Ù…Ø¹Ù…ÙˆÙ„Ø§Ù‹ Ù¾Ø§ÛŒÛŒÙ†â€ŒØªØ± Ø§Ø³Øª.'],
-    ['Ø±ÛŒÙÛŒÙ„ Ùˆ Ø±ÛŒØ²Ø´ Ú†ÛŒØ³ØªØŸ', 'Ø¯Ø± Ø³Ø±ÙˆÛŒØ³â€ŒÙ‡Ø§ÛŒ Ø¯Ø§Ø±Ø§ÛŒ Ú¯Ø§Ø±Ø§Ù†ØªÛŒØŒ Ø§Ú¯Ø± ØªØ¹Ø¯Ø§Ø¯ Ø¨Ø¹Ø¯ Ø§Ø² ØªØ­ÙˆÛŒÙ„ Ú©Ù… Ø´ÙˆØ¯ØŒ Ø·Ø¨Ù‚ Ø´Ø±Ø§ÛŒØ· Ù‡Ù…Ø§Ù† Ø³Ø±ÙˆÛŒØ³ Ø¯ÙˆØ¨Ø§Ø±Ù‡ ØªÚ©Ù…ÛŒÙ„ Ù…ÛŒâ€ŒØ´ÙˆØ¯.'],
-    ['Ø®Ø¯Ù…Ø§Øª Ø§ÛŒØ±Ø§Ù†ÛŒ Ø¯Ø§Ø±ÛŒØ¯ØŸ', 'Ø¨Ù„Ù‡. Ù…Ù…Ø¨Ø± Ø§ÛŒØªØ§ØŒ Ø±ÙˆØ¨ÛŒÚ©Ø§ØŒ Ø³Ø±ÙˆØ´ Ù¾Ù„Ø§Ø³ØŒ Ø¨Ù„Ù‡ØŒ Ø¢ÛŒâ€ŒÚ¯Ù¾ØŒ Ú¯Ù¾ Ùˆ Ø¢Ù¾Ø§Ø±Ø§Øª Ø¯Ø± Ø¯Ø³ØªØ±Ø³ Ø§Ø³Øª.'],
+    ['آیا برای سفارش به رمز عبور نیاز است؟', 'خیر. فقط لینک عمومی پیج، کانال یا پست لازم است. رمز و کد دومرحله‌ای را به هیچ‌کس ندهید.'],
+    ['چطور اولین سفارش را ثبت کنم؟', 'ثبت‌نام کنید، حساب را شارژ کنید، سرویس را انتخاب و لینک را وارد کنید. با یک سفارش تست کوچک شروع کنید.'],
+    ['ارائه‌دهنده مستقیم یعنی چه؟', 'یعنی اسنو پنل خدمات را از واسطه نمی‌خرد؛ مسیر خرید کوتاه‌تر و قیمت معمولاً پایین‌تر است.'],
+    ['ریفیل و ریزش چیست؟', 'در سرویس‌های دارای گارانتی، اگر تعداد بعد از تحویل کم شود، طبق شرایط همان سرویس دوباره تکمیل می‌شود.'],
+    ['خدمات ایرانی دارید؟', 'بله. ممبر ایتا، روبیکا، سروش پلاس، بله، آی‌گپ، گپ و آپارات در دسترس است.'],
   ];
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(backgroundColor: Colors.white, elevation: 0, iconTheme: const IconThemeData(color: cInk), title: const Text('Ø³ÙˆØ§Ù„Ø§Øª Ù…ØªØ¯Ø§ÙˆÙ„', style: TextStyle(fontWeight: FontWeight.w700, color: cInk))),
+        appBar: AppBar(backgroundColor: Colors.white, elevation: 0, iconTheme: const IconThemeData(color: cInk), title: const Text('سوالات متداول', style: TextStyle(fontWeight: FontWeight.w700, color: cInk))),
         body: ListView(padding: const EdgeInsets.all(20), children: [
           for (final e in q)
             Padding(
