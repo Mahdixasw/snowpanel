@@ -16,7 +16,7 @@ const grad = LinearGradient(begin: Alignment.topRight, end: Alignment.bottomLeft
 
 void open(String u) => launchUrl(Uri.parse(u), mode: LaunchMode.externalApplication);
 Route fade(Widget w) => PageRouteBuilder(
-    transitionDuration: const Duration(milliseconds: 450),
+    transitionDuration: const Duration(milliseconds: 250),
     pageBuilder: (_, __, ___) => w,
     transitionsBuilder: (_, a, __, c) => FadeTransition(opacity: a, child: c));
 
@@ -31,7 +31,7 @@ class SnowApp extends StatelessWidget {
   const SnowApp({super.key});
   @override
   Widget build(BuildContext context) => MaterialApp(
-        title: 'اسنو پنل',
+        title: 'Ø§Ø³Ù†Ùˆ Ù¾Ù†Ù„',
         debugShowCheckedModeBanner: false,
         locale: const Locale('fa'),
         builder: (c, w) => Directionality(textDirection: TextDirection.rtl, child: w!),
@@ -113,7 +113,7 @@ Widget card({required Widget child, VoidCallback? onTap, EdgeInsets pad = const 
       ),
     );
 
-Widget logo(double s) => Image.asset('assets/logo.png', width: s, errorBuilder: (_, __, ___) => Text('❄', style: TextStyle(fontSize: s * .8)));
+Widget logo(double s) => Image.asset('assets/logo.png', width: s, errorBuilder: (_, __, ___) => Text('â„', style: TextStyle(fontSize: s * .8)));
 
 class Btn extends StatelessWidget {
   final String t;
@@ -150,7 +150,7 @@ class _SplashState extends State<Splash> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(milliseconds: 1800), () async {
+    Future.delayed(const Duration(milliseconds: 900), () async {
       final p = await SharedPreferences.getInstance();
       if (!mounted) return;
       Navigator.of(context).pushReplacement(fade(p.getBool('in') == true ? const Shell() : const Welcome()));
@@ -167,7 +167,7 @@ class _SplashState extends State<Splash> {
               child: Column(mainAxisSize: MainAxisSize.min, children: [
                 Container(padding: const EdgeInsets.all(20), decoration: const BoxDecoration(color: Colors.white, shape: BoxShape.circle), child: logo(80)),
                 const SizedBox(height: 18),
-                const Text('اسنو پنل', style: TextStyle(fontSize: 30, fontWeight: FontWeight.w700, color: Colors.white)),
+                const Text('Ø§Ø³Ù†Ùˆ Ù¾Ù†Ù„', style: TextStyle(fontSize: 30, fontWeight: FontWeight.w700, color: Colors.white)),
               ]),
             ),
           ]),
@@ -189,16 +189,16 @@ class Welcome extends StatelessWidget {
                 const Spacer(flex: 2),
                 Container(padding: const EdgeInsets.all(18), decoration: const BoxDecoration(color: Colors.white, shape: BoxShape.circle), child: logo(64)),
                 const SizedBox(height: 20),
-                const Text('به اسنو پنل خوش اومدی', style: TextStyle(fontSize: 24, fontWeight: FontWeight.w700, color: Colors.white)),
+                const Text('Ø¨Ù‡ Ø§Ø³Ù†Ùˆ Ù¾Ù†Ù„ Ø®ÙˆØ´ Ø§ÙˆÙ…Ø¯ÛŒ', style: TextStyle(fontSize: 24, fontWeight: FontWeight.w700, color: Colors.white)),
                 const SizedBox(height: 8),
                 const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 36),
-                  child: Text('فالوور، ممبر و بازدید مستقیم از ارائه‌دهنده\nبدون رمز، با رهگیری زنده سفارش',
+                  child: Text('ÙØ§Ù„ÙˆÙˆØ±ØŒ Ù…Ù…Ø¨Ø± Ùˆ Ø¨Ø§Ø²Ø¯ÛŒØ¯ Ù…Ø³ØªÙ‚ÛŒÙ… Ø§Ø² Ø§Ø±Ø§Ø¦Ù‡â€ŒØ¯Ù‡Ù†Ø¯Ù‡\nØ¨Ø¯ÙˆÙ† Ø±Ù…Ø²ØŒ Ø¨Ø§ Ø±Ù‡Ú¯ÛŒØ±ÛŒ Ø²Ù†Ø¯Ù‡ Ø³ÙØ§Ø±Ø´',
                       textAlign: TextAlign.center, style: TextStyle(color: Colors.white, height: 1.8)),
                 ),
                 const SizedBox(height: 20),
                 Wrap(spacing: 8, runSpacing: 8, alignment: WrapAlignment.center, children: [
-                  for (final t in ['🔒 بدون رمز', '📦 رهگیری زنده', '🎁 هدیه شارژ با SNOW5'])
+                  for (final t in ['ðŸ”’ Ø¨Ø¯ÙˆÙ† Ø±Ù…Ø²', 'ðŸ“¦ Ø±Ù‡Ú¯ÛŒØ±ÛŒ Ø²Ù†Ø¯Ù‡', 'ðŸŽ Ù‡Ø¯ÛŒÙ‡ Ø´Ø§Ø±Ú˜ Ø¨Ø§ SNOW5'])
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
                       decoration: BoxDecoration(color: Colors.white.withOpacity(.2), borderRadius: BorderRadius.circular(20)),
@@ -211,11 +211,11 @@ class Welcome extends StatelessWidget {
                   padding: const EdgeInsets.fromLTRB(24, 24, 24, 20),
                   decoration: const BoxDecoration(color: cBg, borderRadius: BorderRadius.vertical(top: Radius.circular(32))),
                   child: Column(mainAxisSize: MainAxisSize.min, children: [
-                    Btn('ورود به حساب', () => Navigator.of(context).push(fade(const AuthPage(false)))),
+                    Btn('ÙˆØ±ÙˆØ¯ Ø¨Ù‡ Ø­Ø³Ø§Ø¨', () => Navigator.of(context).push(fade(const AuthPage(false)))),
                     const SizedBox(height: 12),
-                    Btn('ساخت حساب رایگان', () => Navigator.of(context).push(fade(const AuthPage(true))), filled: false),
+                    Btn('Ø³Ø§Ø®Øª Ø­Ø³Ø§Ø¨ Ø±Ø§ÛŒÚ¯Ø§Ù†', () => Navigator.of(context).push(fade(const AuthPage(true))), filled: false),
                     const SizedBox(height: 10),
-                    TextButton(onPressed: () => open('https://t.me/snowpanelsup'), child: const Text('مشکل در ورود؟ پشتیبانی تلگرام', style: TextStyle(color: cMute))),
+                    TextButton(onPressed: () => open('https://t.me/snowpanelsup'), child: const Text('Ù…Ø´Ú©Ù„ Ø¯Ø± ÙˆØ±ÙˆØ¯ØŸ Ù¾Ø´ØªÛŒØ¨Ø§Ù†ÛŒ ØªÙ„Ú¯Ø±Ø§Ù…', style: TextStyle(color: cMute))),
                   ]),
                 ),
               ]),
@@ -250,22 +250,70 @@ Future<void> _guard(BuildContext ctx, String u) async {
 const _inject = r"""
 (function(){
 if(window.__snowRun){window.__snowRun();return;}
-var HIDE_HEADER=true;
 var d=document,R=function(){return d.head||d.documentElement;};
-var KEYS=['بازگشت به','برگشت به','رفتن به سایت','صفحه اصلی','back to','go to','return to','powered by','قدرت گرفته','طراحی شده'];
+var KEYS=['Ø¨Ø§Ø²Ú¯Ø´Øª Ø¨Ù‡','Ø¨Ø±Ú¯Ø´Øª Ø¨Ù‡','Ø±ÙØªÙ† Ø¨Ù‡ Ø³Ø§ÛŒØª','ØµÙØ­Ù‡ Ø§ØµÙ„ÛŒ','back to','go to','return to','powered by','Ù‚Ø¯Ø±Øª Ú¯Ø±ÙØªÙ‡','Ø·Ø±Ø§Ø­ÛŒ Ø´Ø¯Ù‡'];
+var BANNER=['ØªÛŒÚ©Øª Ø§Ø±Ø³Ø§Ù„ Ù†Ú©Ù†ÛŒØ¯','Ø¬ÙˆØ§Ø¨ Ø¯Ø§Ø¯Ù‡ Ù†Ù…ÛŒ'];
+var TOP=/(^|[\s_-])(site-header|main-header|top-?bar|navbar|masthead|app-header|mobile-header|sticky-header|announce\w*|notice-bar|promo-bar|top-banner|alert-bar)/i;
+var BOT=/(bottom|dock|tab-?bar|mobile-nav|mobile-menu|footer|nav)/i;
 var m=d.querySelector('meta[name=viewport]');
 if(!m){m=d.createElement('meta');m.name='viewport';R().appendChild(m);}
 m.content='width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no';
-var css='footer,.elementor-location-header,.elementor-location-footer,#wpadminbar,#backtoblog,.back-to-site,[class*="back-to-"],[class*="backto"],[class*="bottom-nav"],[class*="bottom-bar"],[class*="mobile-bottom"],[class*="tabbar"],[class*="tab-bar"],[id*="bottom-nav"],[id*="mobile-bottom"]{display:none!important}';
-css+='html,body{overflow-x:hidden!important;max-width:100vw!important}body{padding-bottom:0!important;margin-bottom:0!important}';
-if(HIDE_HEADER){css+=(location.pathname.indexOf('/dashboard')<0)?'header{display:none!important}':'body>header,#masthead,.site-header,[data-elementor-type="header"]{display:none!important}';}
+var css='footer,.elementor-location-header,.elementor-location-footer,#wpadminbar,#wp-toolbar,#backtoblog,.back-to-site,[class*="back-to-"],[class*="backto"],[class*="bottom-nav"],[class*="bottom-bar"],[class*="mobile-bottom"],[class*="tabbar"],[class*="tab-bar"],[id*="bottom-nav"],[id*="mobile-bottom"],[class*="floating-cart"],[class*="topbar"],[class*="top-bar"],[class*="announcement"],[class*="notice-bar"],[class*="site-header"],[class*="main-header"],#masthead,[data-elementor-type="header"]{display:none!important}';
+css+='html{margin-top:0!important;padding-top:0!important;scroll-behavior:auto!important}html,body{overflow-x:hidden!important;max-width:100vw!important}body{padding-top:0!important;padding-bottom:0!important;margin-bottom:0!important}*{-webkit-backdrop-filter:none!important;backdrop-filter:none!important}';
+if(location.pathname.indexOf('/dashboard')<0)css+='header{display:none!important}';
 var s=d.createElement('style');s.id='__snowcss';s.textContent=css;R().appendChild(s);
+
 function isAuth(){return location.pathname.indexOf('/login')>-1||/action=register/.test(location.search);}
 function hide(e){e.style.setProperty('display','none','important');e.__sn=1;}
+function cls(e){return ((e.getAttribute('class')||'')+' '+(e.id||''));}
+function clk(e){return e.querySelectorAll('a,button,[role=button]').length;}
+
+function test(e){
+ var t=e.tagName;
+ if(!t||e.__sn||/^(SCRIPT|STYLE|LINK|META|HEAD|BODY|HTML|NOSCRIPT|SVG|PATH|IMG)$/i.test(t))return;
+ var c=getComputedStyle(e);
+ if(c.display==='none')return;
+ var r=e.getBoundingClientRect();
+ if(!r.width||!r.height)return;
+ var w=innerWidth,h=innerHeight,fx=c.position==='fixed'||c.position==='sticky';
+ var k=cls(e),n=clk(e),hasIn=!!e.querySelector('input,textarea,select');
+ // bottom bars + floating cart button
+ if(fx&&!hasIn&&r.top>=h*.6&&r.bottom>=h-120&&r.height<=200){
+  var wide=r.width>=w*.6,round=r.width<=100&&r.height<=100&&n>=1;
+  if(round||(wide&&(t==='NAV'||BOT.test(k)||n>=2))){hide(e);return;}
+ }
+ // top chrome: admin bar, notice banner, site header
+ var top=r.top+(window.scrollY||0);
+ if(top<420&&r.width>=w*.9&&r.height>=30&&r.height<=300){
+  var img=!!e.querySelector('img,svg');
+  if(t==='NAV'||(t==='HEADER'&&!e.closest('main,article'))||TOP.test(k)||(fx&&r.top<=10&&!hasIn)||(img&&n>=3&&!hasIn&&r.height<=200&&top<300))hide(e);
+ }
+}
+var bd=0;
+function banner(){
+ if(bd)return;
+ var l=d.querySelectorAll('p,span,div,h3,h4');
+ for(var i=0;i<l.length;i++){
+  var e=l[i];
+  if(e.children.length>4)continue;
+  var t=e.textContent||'';
+  if(t.length>220)continue;
+  for(var j=0;j<BANNER.length;j++){
+   if(t.indexOf(BANNER[j])>-1){
+    var x=e;
+    while(x.parentElement&&x.parentElement!==d.body){
+     var p=x.parentElement,r=p.getBoundingClientRect();
+     if(r.width>=innerWidth*.9&&r.height<=420&&(p.textContent||'').length<500)x=p;else break;
+    }
+    hide(x);bd=1;return;
+   }
+  }
+ }
+}
 function remember(){
  d.querySelectorAll('input[type=checkbox]').forEach(function(x){
   var l=x.closest('label'),k=((x.name||'')+(x.id||'')).toLowerCase(),t=((l&&l.textContent)||'').toLowerCase();
-  if(k.indexOf('remember')>-1||t.indexOf('remember')>-1||t.indexOf('به خاطر')>-1||t.indexOf('بخاطر')>-1){
+  if(k.indexOf('remember')>-1||t.indexOf('remember')>-1||t.indexOf('Ø¨Ù‡ Ø®Ø§Ø·Ø±')>-1||t.indexOf('Ø¨Ø®Ø§Ø·Ø±')>-1){
    if(!x.checked)x.click();
    hide(l||x.parentElement||x);
   }
@@ -279,27 +327,43 @@ function keyHide(){
   for(var i=0;i<KEYS.length;i++){if(t.indexOf(KEYS[i])>-1){hide(e.closest('a,button')||e);return;}}
  });
 }
-function bars(){
- var w=innerWidth,h=innerHeight;
- d.querySelectorAll('body>*,body>*>*,body>*>*>*').forEach(function(e){
-  if(e.__sn)return;
-  var c=getComputedStyle(e);
-  if(c.position!=='fixed'&&c.position!=='sticky')return;
-  var r=e.getBoundingClientRect();
-  if(r.width<w*.6||r.height<30||r.height>150||Math.abs(r.bottom-h)>6)return;
-  if(e.querySelector('input,textarea,select,[type=submit]'))return;
-  var k=((e.getAttribute('class')||'')+' '+e.id).toLowerCase();
-  if(e.tagName==='NAV'||/(bottom|mobile|tab|nav|dock|menu|bar)/.test(k)||e.querySelectorAll('a,button').length>=3)hide(e);
- });
+var pend=[],q=0;
+function flush(){
+ q=0;
+ var a=pend;pend=[];
+ try{
+  for(var i=0;i<a.length;i++){var e=a[i];if(e.isConnected)test(e);}
+  banner();
+  if(isAuth()){remember();keyHide();}
+ }catch(x){}
 }
-function sweep(){try{if(isAuth()){remember();keyHide();}bars();}catch(e){}}
-var q=0;
-function run(){if(q)return;q=setTimeout(function(){q=0;sweep();},400);}
-window.__snowRun=run;
-try{new MutationObserver(run).observe(d.documentElement,{childList:true,subtree:true});}catch(e){}
-d.addEventListener('DOMContentLoaded',run);
-addEventListener('resize',run);
-sweep();
+function sched(){
+ if(q)return;q=1;
+ if(window.requestIdleCallback)requestIdleCallback(flush,{timeout:600});else setTimeout(flush,150);
+}
+function full(){
+ pend=pend.concat(Array.prototype.slice.call(d.querySelectorAll('body>*,body>*>*,body>*>*>*,body>*>*>*>*')));
+ d.querySelectorAll('img').forEach(function(im,i){if(i>1&&!im.getAttribute('loading'))im.loading='lazy';im.decoding='async';});
+ sched();
+}
+window.__snowRun=full;
+try{
+ new MutationObserver(function(ms){
+  for(var i=0;i<ms.length;i++){
+   var a=ms[i].addedNodes;
+   for(var j=0;j<a.length;j++){
+    var n=a[j];if(n.nodeType!==1)continue;
+    pend.push(n);
+    var c=n.children;for(var k=0;k<c.length&&k<20;k++)pend.push(c[k]);
+   }
+  }
+  sched();
+ }).observe(d.documentElement,{childList:true,subtree:true});
+}catch(e){}
+d.addEventListener('DOMContentLoaded',full);
+addEventListener('load',full);
+setTimeout(full,1500);setTimeout(full,4000);
+full();
 })();
 """;
 
@@ -368,11 +432,11 @@ class _AuthState extends State<AuthPage> {
         appBar: AppBar(
           backgroundColor: Colors.white,
           elevation: 0,
-          title: Text(widget.register ? 'ساخت حساب' : 'ورود', style: const TextStyle(fontWeight: FontWeight.w700, color: cInk)),
+          title: Text(widget.register ? 'Ø³Ø§Ø®Øª Ø­Ø³Ø§Ø¨' : 'ÙˆØ±ÙˆØ¯', style: const TextStyle(fontWeight: FontWeight.w700, color: cInk)),
           iconTheme: const IconThemeData(color: cInk),
           bottom: p < 100 ? PreferredSize(preferredSize: const Size.fromHeight(2), child: LinearProgressIndicator(value: p / 100, minHeight: 2, color: cCyan)) : null,
         ),
-        body: Stack(children: [WebViewWidget(controller: c), if (p < 80) const Positioned.fill(child: _Cover())]),
+        body: Stack(children: [WebViewWidget(controller: c), if (p < 90) const Positioned.fill(child: _Cover())]),
       );
 }
 
@@ -414,7 +478,7 @@ class _WebTabState extends State<WebTab> with AutomaticKeepAliveClientMixin {
           ]),
         ),
         if (p < 100) LinearProgressIndicator(value: p / 100, minHeight: 2, color: cCyan, backgroundColor: cSoft),
-        Expanded(child: Stack(children: [WebViewWidget(controller: c), if (p < 80) const Positioned.fill(child: _Cover())])),
+        Expanded(child: Stack(children: [WebViewWidget(controller: c), if (p < 90) const Positioned.fill(child: _Cover())])),
       ]),
     );
   }
@@ -430,6 +494,17 @@ class Shell extends StatefulWidget {
 class _ShellState extends State<Shell> {
   int i = 0;
   final seen = <int>{0};
+  @override
+  void initState() {
+    super.initState();
+    // pre-load the busiest tabs quietly so switching is instant
+    for (final n in [2, 1]) {
+      Future.delayed(Duration(milliseconds: n == 2 ? 2000 : 4000), () {
+        if (mounted && !seen.contains(n)) setState(() => seen.add(n));
+      });
+    }
+  }
+
   void go(int n) => setState(() {
         i = n;
         seen.add(n);
@@ -439,20 +514,20 @@ class _ShellState extends State<Shell> {
   Widget build(BuildContext context) => Scaffold(
         body: IndexedStack(index: i, children: [
           Home(go),
-          seen.contains(1) ? const WebTab('/services-3', 'همه خدمات') : const SizedBox(),
-          seen.contains(2) ? const WebTab('/dashboard/?action=orders&section=new', 'سفارش جدید') : const SizedBox(),
-          seen.contains(3) ? const WebTab('/dashboard/?action=add-credit', 'شارژ حساب') : const SizedBox(),
+          seen.contains(1) ? const WebTab('/services-3', 'Ù‡Ù…Ù‡ Ø®Ø¯Ù…Ø§Øª') : const SizedBox(),
+          seen.contains(2) ? const WebTab('/dashboard/?action=orders&section=new', 'Ø³ÙØ§Ø±Ø´ Ø¬Ø¯ÛŒØ¯') : const SizedBox(),
+          seen.contains(3) ? const WebTab('/dashboard/?action=add-credit', 'Ø´Ø§Ø±Ú˜ Ø­Ø³Ø§Ø¨') : const SizedBox(),
           const More(),
         ]),
         bottomNavigationBar: NavigationBar(
           selectedIndex: i,
           onDestinationSelected: go,
           destinations: const [
-            NavigationDestination(icon: Icon(Icons.home_outlined), selectedIcon: Icon(Icons.home_rounded, color: cBlue), label: 'خانه'),
-            NavigationDestination(icon: Icon(Icons.grid_view_outlined), selectedIcon: Icon(Icons.grid_view_rounded, color: cBlue), label: 'خدمات'),
-            NavigationDestination(icon: Icon(Icons.add_circle_outline), selectedIcon: Icon(Icons.add_circle_rounded, color: cBlue), label: 'سفارش'),
-            NavigationDestination(icon: Icon(Icons.account_balance_wallet_outlined), selectedIcon: Icon(Icons.account_balance_wallet_rounded, color: cBlue), label: 'کیف پول'),
-            NavigationDestination(icon: Icon(Icons.menu_rounded), selectedIcon: Icon(Icons.menu_rounded, color: cBlue), label: 'بیشتر'),
+            NavigationDestination(icon: Icon(Icons.home_outlined), selectedIcon: Icon(Icons.home_rounded, color: cBlue), label: 'Ø®Ø§Ù†Ù‡'),
+            NavigationDestination(icon: Icon(Icons.grid_view_outlined), selectedIcon: Icon(Icons.grid_view_rounded, color: cBlue), label: 'Ø®Ø¯Ù…Ø§Øª'),
+            NavigationDestination(icon: Icon(Icons.add_circle_outline), selectedIcon: Icon(Icons.add_circle_rounded, color: cBlue), label: 'Ø³ÙØ§Ø±Ø´'),
+            NavigationDestination(icon: Icon(Icons.account_balance_wallet_outlined), selectedIcon: Icon(Icons.account_balance_wallet_rounded, color: cBlue), label: 'Ú©ÛŒÙ Ù¾ÙˆÙ„'),
+            NavigationDestination(icon: Icon(Icons.menu_rounded), selectedIcon: Icon(Icons.menu_rounded, color: cBlue), label: 'Ø¨ÛŒØ´ØªØ±'),
           ],
         ),
       );
@@ -476,22 +551,22 @@ class Home extends StatelessWidget {
                   Row(children: [
                     Container(padding: const EdgeInsets.all(6), decoration: const BoxDecoration(color: Colors.white, shape: BoxShape.circle), child: logo(26)),
                     const SizedBox(width: 10),
-                    const Expanded(child: Text('اسنو پنل', style: TextStyle(fontSize: 19, fontWeight: FontWeight.w700, color: Colors.white))),
+                    const Expanded(child: Text('Ø§Ø³Ù†Ùˆ Ù¾Ù†Ù„', style: TextStyle(fontSize: 19, fontWeight: FontWeight.w700, color: Colors.white))),
                     IconButton(
                         onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const Support())),
                         icon: const Icon(Icons.support_agent_rounded, color: Colors.white)),
                   ]),
                   const SizedBox(height: 18),
-                  const Text('سلام، خوش اومدی ❄', style: TextStyle(fontSize: 24, fontWeight: FontWeight.w700, color: Colors.white)),
+                  const Text('Ø³Ù„Ø§Ù…ØŒ Ø®ÙˆØ´ Ø§ÙˆÙ…Ø¯ÛŒ â„', style: TextStyle(fontSize: 24, fontWeight: FontWeight.w700, color: Colors.white)),
                   const SizedBox(height: 6),
-                  const Text('سفارش بده، رهگیری کن، رشد کن', style: TextStyle(color: Colors.white)),
+                  const Text('Ø³ÙØ§Ø±Ø´ Ø¨Ø¯Ù‡ØŒ Ø±Ù‡Ú¯ÛŒØ±ÛŒ Ú©Ù†ØŒ Ø±Ø´Ø¯ Ú©Ù†', style: TextStyle(color: Colors.white)),
                   const SizedBox(height: 20),
                   Row(children: const [
-                    Expanded(child: _Stat('۲۰۰,۰۰۰+', 'سفارش')),
+                    Expanded(child: _Stat('Û²Û°Û°,Û°Û°Û°+', 'Ø³ÙØ§Ø±Ø´')),
                     SizedBox(width: 10),
-                    Expanded(child: _Stat('۱۳,۰۰۰+', 'مشتری')),
+                    Expanded(child: _Stat('Û±Û³,Û°Û°Û°+', 'Ù…Ø´ØªØ±ÛŒ')),
                     SizedBox(width: 10),
-                    Expanded(child: _Stat('۶ سال', 'سابقه')),
+                    Expanded(child: _Stat('Û¶ Ø³Ø§Ù„', 'Ø³Ø§Ø¨Ù‚Ù‡')),
                   ]),
                 ]),
               ),
@@ -502,16 +577,16 @@ class Home extends StatelessWidget {
           padding: const EdgeInsets.all(20),
           child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Row(children: [
-              _Quick(Icons.add_circle_rounded, 'سفارش جدید', () => go(2)),
-              _Quick(Icons.account_balance_wallet_rounded, 'شارژ', () => go(3)),
-              _Quick(Icons.grid_view_rounded, 'خدمات', () => go(1)),
-              _Quick(Icons.support_agent_rounded, 'پشتیبانی', () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const Support()))),
+              _Quick(Icons.add_circle_rounded, 'Ø³ÙØ§Ø±Ø´ Ø¬Ø¯ÛŒØ¯', () => go(2)),
+              _Quick(Icons.account_balance_wallet_rounded, 'Ø´Ø§Ø±Ú˜', () => go(3)),
+              _Quick(Icons.grid_view_rounded, 'Ø®Ø¯Ù…Ø§Øª', () => go(1)),
+              _Quick(Icons.support_agent_rounded, 'Ù¾Ø´ØªÛŒØ¨Ø§Ù†ÛŒ', () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const Support()))),
             ]),
             const SizedBox(height: 26),
-            const Text('کدام شبکه؟', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700, color: cInk)),
+            const Text('Ú©Ø¯Ø§Ù… Ø´Ø¨Ú©Ù‡ØŸ', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700, color: cInk)),
             const SizedBox(height: 12),
             Wrap(spacing: 10, runSpacing: 10, children: [
-              for (final n in ['✈️ تلگرام', '📸 اینستاگرام', '🟠 ایتا', '🔵 روبیکا', '▶️ یوتیوب', '🎵 تیک‌تاک', '🐦 توییتر', '🌐 بقیه'])
+              for (final n in ['âœˆï¸ ØªÙ„Ú¯Ø±Ø§Ù…', 'ðŸ“¸ Ø§ÛŒÙ†Ø³ØªØ§Ú¯Ø±Ø§Ù…', 'ðŸŸ  Ø§ÛŒØªØ§', 'ðŸ”µ Ø±ÙˆØ¨ÛŒÚ©Ø§', 'â–¶ï¸ ÛŒÙˆØªÛŒÙˆØ¨', 'ðŸŽµ ØªÛŒÚ©â€ŒØªØ§Ú©', 'ðŸ¦ ØªÙˆÛŒÛŒØªØ±', 'ðŸŒ Ø¨Ù‚ÛŒÙ‡'])
                 GestureDetector(
                   onTap: () => go(1),
                   child: Container(
@@ -525,12 +600,12 @@ class Home extends StatelessWidget {
             card(
               onTap: () {
                 Clipboard.setData(const ClipboardData(text: 'SNOW5'));
-                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('کد SNOW5 کپی شد')));
+                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Ú©Ø¯ SNOW5 Ú©Ù¾ÛŒ Ø´Ø¯')));
               },
               child: Row(children: [
-                const Text('🎁', style: TextStyle(fontSize: 30)),
+                const Text('ðŸŽ', style: TextStyle(fontSize: 30)),
                 const SizedBox(width: 14),
-                const Expanded(child: Text('هدیه اولین شارژ\nکد را هنگام شارژ وارد کن', style: TextStyle(height: 1.7, color: cInk, fontWeight: FontWeight.w700))),
+                const Expanded(child: Text('Ù‡Ø¯ÛŒÙ‡ Ø§ÙˆÙ„ÛŒÙ† Ø´Ø§Ø±Ú˜\nÚ©Ø¯ Ø±Ø§ Ù‡Ù†Ú¯Ø§Ù… Ø´Ø§Ø±Ú˜ ÙˆØ§Ø±Ø¯ Ú©Ù†', style: TextStyle(height: 1.7, color: cInk, fontWeight: FontWeight.w700))),
                 Container(
                     padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
                     decoration: BoxDecoration(color: cSoft, borderRadius: BorderRadius.circular(12)),
@@ -601,16 +676,16 @@ class More extends StatelessWidget {
   @override
   Widget build(BuildContext context) => SafeArea(
         child: ListView(padding: const EdgeInsets.all(20), children: [
-          const Text('بیشتر', style: TextStyle(fontSize: 24, fontWeight: FontWeight.w700, color: cInk)),
+          const Text('Ø¨ÛŒØ´ØªØ±', style: TextStyle(fontSize: 24, fontWeight: FontWeight.w700, color: cInk)),
           const SizedBox(height: 16),
-          tile(context, Icons.dashboard_rounded, 'داشبورد', 'حساب، اطلاعات و تیکت‌ها', () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const Page('داشبورد', '/dashboard')))),
-          tile(context, Icons.account_balance_wallet_rounded, 'شارژ حساب', 'پرداخت امن با درگاه', () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const Page('شارژ حساب', '/dashboard/?action=add-credit')))),
-          tile(context, Icons.receipt_long_rounded, 'سفارش‌های من', 'رهگیری وضعیت سفارش‌ها', () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const Page('سفارش‌های من', '/dashboard/?action=orders')))),
-          tile(context, Icons.support_agent_rounded, 'پشتیبانی', 'تلگرام، ربات و کانال', () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const Support()))),
-          tile(context, Icons.help_rounded, 'سوالات متداول', 'پاسخ کوتاه به پرسش‌های پرتکرار', () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const Faq()))),
-          tile(context, Icons.price_change_rounded, 'لیست قیمت', 'قیمت همه خدمات', () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const Page('لیست قیمت', '/price-service')))),
+          tile(context, Icons.dashboard_rounded, 'Ø¯Ø§Ø´Ø¨ÙˆØ±Ø¯', 'Ø­Ø³Ø§Ø¨ØŒ Ø§Ø·Ù„Ø§Ø¹Ø§Øª Ùˆ ØªÛŒÚ©Øªâ€ŒÙ‡Ø§', () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const Page('Ø¯Ø§Ø´Ø¨ÙˆØ±Ø¯', '/dashboard')))),
+          tile(context, Icons.account_balance_wallet_rounded, 'Ø´Ø§Ø±Ú˜ Ø­Ø³Ø§Ø¨', 'Ù¾Ø±Ø¯Ø§Ø®Øª Ø§Ù…Ù† Ø¨Ø§ Ø¯Ø±Ú¯Ø§Ù‡', () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const Page('Ø´Ø§Ø±Ú˜ Ø­Ø³Ø§Ø¨', '/dashboard/?action=add-credit')))),
+          tile(context, Icons.receipt_long_rounded, 'Ø³ÙØ§Ø±Ø´â€ŒÙ‡Ø§ÛŒ Ù…Ù†', 'Ø±Ù‡Ú¯ÛŒØ±ÛŒ ÙˆØ¶Ø¹ÛŒØª Ø³ÙØ§Ø±Ø´â€ŒÙ‡Ø§', () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const Page('Ø³ÙØ§Ø±Ø´â€ŒÙ‡Ø§ÛŒ Ù…Ù†', '/dashboard/?action=orders')))),
+          tile(context, Icons.support_agent_rounded, 'Ù¾Ø´ØªÛŒØ¨Ø§Ù†ÛŒ', 'ØªÙ„Ú¯Ø±Ø§Ù…ØŒ Ø±Ø¨Ø§Øª Ùˆ Ú©Ø§Ù†Ø§Ù„', () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const Support()))),
+          tile(context, Icons.help_rounded, 'Ø³ÙˆØ§Ù„Ø§Øª Ù…ØªØ¯Ø§ÙˆÙ„', 'Ù¾Ø§Ø³Ø® Ú©ÙˆØªØ§Ù‡ Ø¨Ù‡ Ù¾Ø±Ø³Ø´â€ŒÙ‡Ø§ÛŒ Ù¾Ø±ØªÚ©Ø±Ø§Ø±', () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const Faq()))),
+          tile(context, Icons.price_change_rounded, 'Ù„ÛŒØ³Øª Ù‚ÛŒÙ…Øª', 'Ù‚ÛŒÙ…Øª Ù‡Ù…Ù‡ Ø®Ø¯Ù…Ø§Øª', () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const Page('Ù„ÛŒØ³Øª Ù‚ÛŒÙ…Øª', '/price-service')))),
           const SizedBox(height: 10),
-          Btn('خروج از حساب', () async {
+          Btn('Ø®Ø±ÙˆØ¬ Ø§Ø² Ø­Ø³Ø§Ø¨', () async {
             final sp = await SharedPreferences.getInstance();
             await sp.remove('in');
             await WebViewCookieManager().clearCookies();
@@ -646,7 +721,7 @@ class _WebS extends State<_Web> {
       if (mounted) setState(() => p = v);
     }, onUrl: (u) => _guard(context, u));
   @override
-  Widget build(BuildContext context) => Stack(children: [WebViewWidget(controller: c), if (p < 80) const Positioned.fill(child: _Cover())]);
+  Widget build(BuildContext context) => Stack(children: [WebViewWidget(controller: c), if (p < 90) const Positioned.fill(child: _Cover())]);
 }
 
 // ---------- Support ----------
@@ -670,16 +745,16 @@ class Support extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(backgroundColor: Colors.white, elevation: 0, iconTheme: const IconThemeData(color: cInk), title: const Text('پشتیبانی', style: TextStyle(fontWeight: FontWeight.w700, color: cInk))),
+        appBar: AppBar(backgroundColor: Colors.white, elevation: 0, iconTheme: const IconThemeData(color: cInk), title: const Text('Ù¾Ø´ØªÛŒØ¨Ø§Ù†ÛŒ', style: TextStyle(fontWeight: FontWeight.w700, color: cInk))),
         body: ListView(padding: const EdgeInsets.all(20), children: [
           card(
-            child: const Text('برای پاسخ سریع‌تر، پیام تلگرام بده. تیکت داخل پنل جواب داده نمی‌شود.', style: TextStyle(height: 1.8, color: cInk, fontWeight: FontWeight.w700)),
+            child: const Text('Ø¨Ø±Ø§ÛŒ Ù¾Ø§Ø³Ø® Ø³Ø±ÛŒØ¹â€ŒØªØ±ØŒ Ù¾ÛŒØ§Ù… ØªÙ„Ú¯Ø±Ø§Ù… Ø¨Ø¯Ù‡. ØªÛŒÚ©Øª Ø¯Ø§Ø®Ù„ Ù¾Ù†Ù„ Ø¬ÙˆØ§Ø¨ Ø¯Ø§Ø¯Ù‡ Ù†Ù…ÛŒâ€ŒØ´ÙˆØ¯.', style: TextStyle(height: 1.8, color: cInk, fontWeight: FontWeight.w700)),
           ),
           const SizedBox(height: 14),
-          item(Icons.support_agent_rounded, 'پشتیبانی تلگرام', '@snowpanelsup', 'https://t.me/snowpanelsup'),
-          item(Icons.smart_toy_rounded, 'ربات تلگرام', '@snowpanelbot', 'https://t.me/snowpanelbot'),
-          item(Icons.campaign_rounded, 'کانال تلگرام', '@snowpanel', 'https://t.me/snowpanel'),
-          item(Icons.camera_alt_rounded, 'اینستاگرام', '@snowpanel', 'https://instagram.com/snowpanel'),
+          item(Icons.support_agent_rounded, 'Ù¾Ø´ØªÛŒØ¨Ø§Ù†ÛŒ ØªÙ„Ú¯Ø±Ø§Ù…', '@snowpanelsup', 'https://t.me/snowpanelsup'),
+          item(Icons.smart_toy_rounded, 'Ø±Ø¨Ø§Øª ØªÙ„Ú¯Ø±Ø§Ù…', '@snowpanelbot', 'https://t.me/snowpanelbot'),
+          item(Icons.campaign_rounded, 'Ú©Ø§Ù†Ø§Ù„ ØªÙ„Ú¯Ø±Ø§Ù…', '@snowpanel', 'https://t.me/snowpanel'),
+          item(Icons.camera_alt_rounded, 'Ø§ÛŒÙ†Ø³ØªØ§Ú¯Ø±Ø§Ù…', '@snowpanel', 'https://instagram.com/snowpanel'),
         ]),
       );
 }
@@ -688,15 +763,15 @@ class Support extends StatelessWidget {
 class Faq extends StatelessWidget {
   const Faq({super.key});
   static const q = [
-    ['آیا برای سفارش به رمز عبور نیاز است؟', 'خیر. فقط لینک عمومی پیج، کانال یا پست لازم است. رمز و کد دومرحله‌ای را به هیچ‌کس ندهید.'],
-    ['چطور اولین سفارش را ثبت کنم؟', 'ثبت‌نام کنید، حساب را شارژ کنید، سرویس را انتخاب و لینک را وارد کنید. با یک سفارش تست کوچک شروع کنید.'],
-    ['ارائه‌دهنده مستقیم یعنی چه؟', 'یعنی اسنو پنل خدمات را از واسطه نمی‌خرد؛ مسیر خرید کوتاه‌تر و قیمت معمولاً پایین‌تر است.'],
-    ['ریفیل و ریزش چیست؟', 'در سرویس‌های دارای گارانتی، اگر تعداد بعد از تحویل کم شود، طبق شرایط همان سرویس دوباره تکمیل می‌شود.'],
-    ['خدمات ایرانی دارید؟', 'بله. ممبر ایتا، روبیکا، سروش پلاس، بله، آی‌گپ، گپ و آپارات در دسترس است.'],
+    ['Ø¢ÛŒØ§ Ø¨Ø±Ø§ÛŒ Ø³ÙØ§Ø±Ø´ Ø¨Ù‡ Ø±Ù…Ø² Ø¹Ø¨ÙˆØ± Ù†ÛŒØ§Ø² Ø§Ø³ØªØŸ', 'Ø®ÛŒØ±. ÙÙ‚Ø· Ù„ÛŒÙ†Ú© Ø¹Ù…ÙˆÙ…ÛŒ Ù¾ÛŒØ¬ØŒ Ú©Ø§Ù†Ø§Ù„ ÛŒØ§ Ù¾Ø³Øª Ù„Ø§Ø²Ù… Ø§Ø³Øª. Ø±Ù…Ø² Ùˆ Ú©Ø¯ Ø¯ÙˆÙ…Ø±Ø­Ù„Ù‡â€ŒØ§ÛŒ Ø±Ø§ Ø¨Ù‡ Ù‡ÛŒÚ†â€ŒÚ©Ø³ Ù†Ø¯Ù‡ÛŒØ¯.'],
+    ['Ú†Ø·ÙˆØ± Ø§ÙˆÙ„ÛŒÙ† Ø³ÙØ§Ø±Ø´ Ø±Ø§ Ø«Ø¨Øª Ú©Ù†Ù…ØŸ', 'Ø«Ø¨Øªâ€ŒÙ†Ø§Ù… Ú©Ù†ÛŒØ¯ØŒ Ø­Ø³Ø§Ø¨ Ø±Ø§ Ø´Ø§Ø±Ú˜ Ú©Ù†ÛŒØ¯ØŒ Ø³Ø±ÙˆÛŒØ³ Ø±Ø§ Ø§Ù†ØªØ®Ø§Ø¨ Ùˆ Ù„ÛŒÙ†Ú© Ø±Ø§ ÙˆØ§Ø±Ø¯ Ú©Ù†ÛŒØ¯. Ø¨Ø§ ÛŒÚ© Ø³ÙØ§Ø±Ø´ ØªØ³Øª Ú©ÙˆÚ†Ú© Ø´Ø±ÙˆØ¹ Ú©Ù†ÛŒØ¯.'],
+    ['Ø§Ø±Ø§Ø¦Ù‡â€ŒØ¯Ù‡Ù†Ø¯Ù‡ Ù…Ø³ØªÙ‚ÛŒÙ… ÛŒØ¹Ù†ÛŒ Ú†Ù‡ØŸ', 'ÛŒØ¹Ù†ÛŒ Ø§Ø³Ù†Ùˆ Ù¾Ù†Ù„ Ø®Ø¯Ù…Ø§Øª Ø±Ø§ Ø§Ø² ÙˆØ§Ø³Ø·Ù‡ Ù†Ù…ÛŒâ€ŒØ®Ø±Ø¯Ø› Ù…Ø³ÛŒØ± Ø®Ø±ÛŒØ¯ Ú©ÙˆØªØ§Ù‡â€ŒØªØ± Ùˆ Ù‚ÛŒÙ…Øª Ù…Ø¹Ù…ÙˆÙ„Ø§Ù‹ Ù¾Ø§ÛŒÛŒÙ†â€ŒØªØ± Ø§Ø³Øª.'],
+    ['Ø±ÛŒÙÛŒÙ„ Ùˆ Ø±ÛŒØ²Ø´ Ú†ÛŒØ³ØªØŸ', 'Ø¯Ø± Ø³Ø±ÙˆÛŒØ³â€ŒÙ‡Ø§ÛŒ Ø¯Ø§Ø±Ø§ÛŒ Ú¯Ø§Ø±Ø§Ù†ØªÛŒØŒ Ø§Ú¯Ø± ØªØ¹Ø¯Ø§Ø¯ Ø¨Ø¹Ø¯ Ø§Ø² ØªØ­ÙˆÛŒÙ„ Ú©Ù… Ø´ÙˆØ¯ØŒ Ø·Ø¨Ù‚ Ø´Ø±Ø§ÛŒØ· Ù‡Ù…Ø§Ù† Ø³Ø±ÙˆÛŒØ³ Ø¯ÙˆØ¨Ø§Ø±Ù‡ ØªÚ©Ù…ÛŒÙ„ Ù…ÛŒâ€ŒØ´ÙˆØ¯.'],
+    ['Ø®Ø¯Ù…Ø§Øª Ø§ÛŒØ±Ø§Ù†ÛŒ Ø¯Ø§Ø±ÛŒØ¯ØŸ', 'Ø¨Ù„Ù‡. Ù…Ù…Ø¨Ø± Ø§ÛŒØªØ§ØŒ Ø±ÙˆØ¨ÛŒÚ©Ø§ØŒ Ø³Ø±ÙˆØ´ Ù¾Ù„Ø§Ø³ØŒ Ø¨Ù„Ù‡ØŒ Ø¢ÛŒâ€ŒÚ¯Ù¾ØŒ Ú¯Ù¾ Ùˆ Ø¢Ù¾Ø§Ø±Ø§Øª Ø¯Ø± Ø¯Ø³ØªØ±Ø³ Ø§Ø³Øª.'],
   ];
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(backgroundColor: Colors.white, elevation: 0, iconTheme: const IconThemeData(color: cInk), title: const Text('سوالات متداول', style: TextStyle(fontWeight: FontWeight.w700, color: cInk))),
+        appBar: AppBar(backgroundColor: Colors.white, elevation: 0, iconTheme: const IconThemeData(color: cInk), title: const Text('Ø³ÙˆØ§Ù„Ø§Øª Ù…ØªØ¯Ø§ÙˆÙ„', style: TextStyle(fontWeight: FontWeight.w700, color: cInk))),
         body: ListView(padding: const EdgeInsets.all(20), children: [
           for (final e in q)
             Padding(
